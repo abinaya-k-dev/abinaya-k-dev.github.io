@@ -97,6 +97,17 @@
   .p-tags span{ font-family:'JetBrains Mono',monospace; font-size:12px; color:rgb(var(--pc)); border:1px solid rgba(var(--pc),0.4); padding:7px 14px; border-radius:999px;
     background:rgba(var(--pc),0.08); }
   .p-note{ margin-top:22px; font-size:0.85rem; color:var(--dim); font-style:italic; border-left:2px solid rgba(var(--pc),0.5); padding-left:14px; }
+  .proj-card{ display:block; margin-top:30px; text-decoration:none; color:inherit; border:1px solid rgba(var(--pc),0.35);
+    background:rgba(var(--pc),0.06); border-radius:18px; padding:22px 24px; transition:transform .3s ease, border-color .3s ease, background .3s ease; }
+  .proj-card:hover{ transform:translateY(-4px); border-color:rgba(var(--pc),0.75); background:rgba(var(--pc),0.12); }
+  .proj-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .proj-name{ font-family:'Outfit',sans-serif; font-size:1.15rem; font-weight:700; letter-spacing:-0.01em; }
+  .proj-status{ font-family:'JetBrains Mono',monospace; font-size:11px; color:rgb(var(--pc)); border:1px solid rgba(var(--pc),0.4);
+    background:rgba(var(--pc),0.1); padding:5px 11px; border-radius:999px; white-space:nowrap; }
+  .proj-desc{ margin-top:12px; font-size:0.92rem; line-height:1.65; color:var(--dim); }
+  .proj-foot{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:16px; }
+  .proj-stack{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--dim); }
+  .proj-link{ font-family:'JetBrains Mono',monospace; font-size:12px; color:rgb(var(--pc)); }
   @media (max-width:900px){ .p-grid{ grid-template-columns:1fr; } .p-img{ order:-1; } }
 
   #dev{ --pc: var(--dev); } #mom{ --pc: var(--mom); } #create{ --pc: var(--create); } #fit{ --pc: var(--fit); } #food{ --pc: var(--food); }
@@ -135,8 +146,8 @@
   <div class="hero-text">
     <div class="eyebrow">Portfolio — 2026</div>
     <h1 class="hero-title">Abinaya K</h1>
-    <div class="hero-role">Aspiring AI Engineer</div>
-    <p class="hero-sub">Mathematics graduate turned self-taught builder — currently learning Python, APIs, and machine learning from the ground up, while juggling a few other full-time roles: mother, creator, athlete, cook.</p>
+    <div class="hero-role">Lifelong Learner</div>
+    <p class="hero-sub">Mathematics graduate turned self-taught builder — I pick up whatever catches my curiosity next (Python, APIs, design, a new recipe) and keep re-training myself as the tools change, while juggling a few other full-time roles: mother, creator, athlete, cook.</p>
     <div class="contact-row">
       <a href="mailto:may15july9@gmail.com">may15july9@gmail.com</a>
       <a href="tel:+918148479614">+91 81484 79614</a>
@@ -164,10 +175,21 @@
   <div class="p-grid">
     <div>
       <div class="p-index">01 — The Developer</div>
-      <h1 class="p-title">Learning to build with <em>AI</em>, from scratch.</h1>
-      <p class="p-desc">I don't come from a coding background — I'm a Mathematics graduate who spent years teaching and managing records before deciding to learn to build. I'm currently working through a structured AI engineering path: Python, Git, APIs, and machine learning fundamentals, guided daily and shipping small real projects instead of just finishing tutorials.</p>
+      <h1 class="p-title">Curious first, <em>developer</em> second.</h1>
+      <p class="p-desc">I don't come from a coding background — I'm a Mathematics graduate who spent years teaching and managing records before deciding to learn to build. What drives me isn't a job title, it's the itch of not knowing how something works. I learn Python, Git, APIs and machine learning fundamentals by shipping small real projects instead of finishing tutorials, and I keep re-learning as the tools move on. Tools change every few years; the habit of learning is the part that stays, and it's the part I'm proudest of.</p>
       <div class="p-tags"><span>Python (learning)</span><span>Git & GitHub</span><span>APIs</span><span>ML fundamentals</span><span>Claude & ChatGPT certified</span></div>
       <p class="p-note">Honest note: this is a work in progress, not a finished résumé line — I'm early in the journey and building in public.</p>
+      <a class="proj-card" href="https://github.com/abinaya-k-dev/spendmate/releases/latest" target="_blank" rel="noopener">
+        <div class="proj-top">
+          <h3 class="proj-name">SpendMate</h3>
+          <span class="proj-status">Android · v1.0.0</span>
+        </div>
+        <p class="proj-desc">An Android expense tracker I built end to end. It reads bank and UPI SMS on the phone itself — no internet permission, so nothing leaves the device — sorts spending into categories, scans bills with the camera, and flags self transfers so money moved between my own accounts is never counted as spending.</p>
+        <div class="proj-foot">
+          <span class="proj-stack">Flutter · Dart · SQLite</span>
+          <span class="proj-link">Download the APK →</span>
+        </div>
+      </a>
     </div>
     <div class="p-img float-img"><img src="images/developer.png" alt="Developer setup illustration"><div class="shimmer"></div></div>
   </div>
@@ -283,7 +305,7 @@
   });
 
   gsap.utils.toArray('.persona, footer').forEach(sec=>{
-    const items = sec.querySelectorAll('.p-index, .p-title, .p-desc, .p-tags, .p-note, .p-img, .ft-title, .ft-links');
+    const items = sec.querySelectorAll('.p-index, .p-title, .p-desc, .p-tags, .p-note, .proj-card, .p-img, .ft-title, .ft-links');
     gsap.set(items, {opacity:0, y:32});
     ScrollTrigger.create({ trigger: sec, start:'top 72%',
       onEnter: ()=> gsap.to(items, {opacity:1, y:0, duration:0.9, stagger:0.07, ease:'power3.out'}) });
@@ -318,7 +340,7 @@
     });
   });
 
-  const roles = ['Aspiring AI Engineer','Mathematics Graduate','Self-Taught Builder','Content Creator'];
+  const roles = ['Lifelong Learner','Mathematics Graduate','Self-Taught Builder','Content Creator'];
   const roleEl = document.querySelector('.hero-role');
   let ri = 0, ci = 0, deleting = false;
   (function type(){
